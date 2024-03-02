@@ -9,9 +9,14 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name','user_creator_id'];
+
     protected $guarded = [];
 
     public function posts(){
         return $this->belongsToMany(Post::class);
+    }
+    public function userCreator(){
+        return $this->belongsTo(User::class,'user_creator_id');
     }
 }

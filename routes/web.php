@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,21 +17,41 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+// No Auth Routes
+Route::get('/', [DashboardController::class,'index']);
+
+// Auth Routes
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->group(function () {
+    Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
+    Route::resource('/categories',CategoryController::class);
+    Route::resource('/posts',PostController::class);
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+Route::get('/lang/{locale}', function ($locale) {
+    return redirect()->back()->withCookie('locale', $locale);
+})->name('change.lang');
+
+Route::get('/mode', function (Request $request) {
+    $currentMode = $request->cookie('lightMode');
+    
+    if ($currentMode === 'true' || !$currentMode) { // Verifica si la cookie no está establecida o es 'false'
+        return redirect()->back()->withCookie('lightMode', 'false');
+    } else {
+        return redirect()->back()->withCookie('lightMode', 'true');
+    }
+})->name('change.mode');
+
+Route::get('/langs', function (Request $request) {
+    $locale = $request->cookie('locale');
+    if($locale === null){
+        $filePath = lang_path('es.json');
+    }else{
+        $filePath = lang_path($locale . '.json');
+    }
+
+    if (file_exists($filePath)) {
+        return response()->file($filePath);
+    } else {
+        return response()->json(['error' => 'Translation file not found'], 404);
+    }
 });

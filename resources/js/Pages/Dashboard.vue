@@ -1,22 +1,38 @@
 <script setup>
-import AppLayout from '@/Layouts/AppLayout.vue';
-import Welcome from '@/Components/Welcome.vue';
+import AppLayout from '../Layouts/AppLayout.vue'
+import { ref, onMounted, computed } from 'vue'
+import axios from 'axios';
+
+// const translations = ref({});
+
+// const loadTranslations = async () => {
+//   try {
+//     const response = await axios.get('/langs');
+//     translations.value = response.data;
+//   } catch (error) {
+//     console.error('Error loading translations:', error);
+//   }
+// };
+
+// onMounted(loadTranslations);
+
+// const $t = computed(() => (key) => {
+//   return translations.value[key] || key;
+// });
+const emit = defineEmits(['$t'])
+
+const $t = () => {
+    emit('$t');
+};
+
 </script>
 
 <template>
     <AppLayout title="Dashboard">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Dashboard
-            </h2>
+            <h1>{{ $t('Testing.') }}</h1>
+            {{ $page.props }}
         </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <Welcome />
-                </div>
-            </div>
-        </div>
+        
     </AppLayout>
 </template>
