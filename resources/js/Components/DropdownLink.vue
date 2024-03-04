@@ -8,17 +8,29 @@ defineProps({
 </script>
 
 <template>
-    <div>
-        <button v-if="as == 'button'" type="submit" class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+    <li>
+        <button v-if="as == 'button'" type="submit">
             <slot />
         </button>
 
-        <a v-else-if="as =='a'" :href="href" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+        <a v-else-if="as =='a'" :href="href">
             <slot />
         </a>
 
-        <Link v-else :href="href" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+        <Link v-else :href="href">
             <slot />
         </Link>
-    </div>
+    </li>
 </template>
+<style scoped>
+    .menu li{
+        padding: 0 0.8em;
+        margin: 0;
+        cursor: pointer;
+        line-height: 50px;
+        width: 100%;
+    }
+    .menu li:hover{
+        background: #2a2d35;
+    }
+</style>

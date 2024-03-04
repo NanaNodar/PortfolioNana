@@ -7,36 +7,7 @@ import axios from 'axios';
 
 const props = defineProps({
     title: String,
-    lightMode: String,
 });
-
-const lightModeProp = computed(() => usePage().props.lightMode).value
-
-const lightMode = () => {
-   if(lightModeProp === 'true'){
-    let body = document.body;
-    let aElements = document.querySelectorAll('a');
-    let ul = document.querySelector('nav ul');
-
-    // Añadir la clase "light-mode" sin verificar su presencia previa
-    aElements.forEach(a => {
-        a.classList.add("light-mode");
-    });
-    ul.classList.add("light-mode");
-    body.classList.add("light-mode");
-   }else if(lightModeProp === 'false'){
-        let body = document.body;
-        let aElements = document.querySelectorAll('a');
-        let ul = document.querySelector('nav ul');
-
-        // Eliminar la clase "light-mode" sin verificar su presencia previa
-        aElements.forEach(a => {
-            a.classList.remove("light-mode");
-        });
-        ul.classList.remove("light-mode");
-        body.classList.remove("light-mode");  
-    }
-}
 
 const translations = ref({});
 
@@ -51,7 +22,6 @@ const loadTranslations = async () => {
 
 onMounted(() => {
     loadTranslations();
-    lightMode();
 });
 
 const $t = computed(() => (key) => {
@@ -66,7 +36,7 @@ const $t = computed(() => (key) => {
 
         <Banner />
 
-        <div class="min-h-screen max-width mx-3">
+        <div class="page">
             <NavBar @$t="$t" ></NavBar>
 
             <!-- Page Heading -->
@@ -78,34 +48,56 @@ const $t = computed(() => (key) => {
 
             <!-- Page Content -->
             <main>
-                <slot />
+                <slot name="main" />
             </main>
         </div>
     </div>
 </template>
 
 <style>
+
+    @font-face {
+        font-family: Cabin;
+        src: url(assets/fonts/Cabin/static/Cabin-Regular.ttf);
+    }
     body{
         color: #fff;
-        background-color: #37423D;
+        background: rgb(80,13,187);
+        background: linear-gradient(27deg, rgba(80,13,187,1) 0%, rgba(53,53,110,1) 39%, rgba(8,0,73,1) 100%);
+        font-family: Cabin;
+        color: #FBFFF1;
     }
-    body.light-mode{
-        background-color: #fff;
-        color: #000;
+    a{
+        text-decoration: none;
+        color: #FBFFF1;
     }
-    .max-width{
-        max-width: 850px;
+    .page{
+        max-width: 1000px;
+        min-height: 100vh;
+        margin: 0 auto;
     }
     h1{
         font-size: 3rem;
-        font-weight: 700;
+        font-weight: 800;
         line-height: 1.1;
-        margin: 25px 0;
+        margin: 15px 0;
     }
-    @media screen and (min-width: 750px) {
-        .max-width{
-            width: 100%;
-            margin: auto;
+    h2{
+        font-size: 2rem;
+        margin: 10px 0;
+    }
+    h3{
+        font-size: 1.8rem;
+    }
+    @media (max-width: 1200px) {
+        .page{
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    }
+    @media (max-width: 850px) {
+        .page{
+            margin: 0 1.4rem;
         }
     }
 </style>

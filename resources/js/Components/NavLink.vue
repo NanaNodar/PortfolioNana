@@ -15,7 +15,7 @@ const classes = computed(() => {
 </script>
 
 <template>
-    <li v-if="$page.props.user.permissions.includes('create_post')" :class="classes">
+    <li :class="classes">
         <a :href="href">
             <slot />
         </a>
