@@ -63,9 +63,10 @@ const $t = computed(() => (key) => {
     body{
         color: #fff;
         background: rgb(80,13,187);
-        background: linear-gradient(27deg, rgba(80,13,187,1) 0%, rgba(53,53,110,1) 39%, rgba(8,0,73,1) 100%);
+        background: linear-gradient(27deg, #500dbb 0%, #35356e 39%, #080049 100%);
         font-family: Cabin;
         color: #FBFFF1;
+        overflow-x: hidden;
     }
     a{
         text-decoration: none;
@@ -88,6 +89,7 @@ const $t = computed(() => (key) => {
     }
     h3{
         font-size: 1.8rem;
+        margin: 10px 0;
     }
     @media (max-width: 1200px) {
         .page{
