@@ -6,6 +6,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 </script>
 
 <template>
+
     <nav>
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
@@ -13,7 +14,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
         </label>
         <ul>
             <li>
-                <a :class="{ 'active': route().current('categories.*') }" :href="route('categories.index')">About me</a>
+                <a :class="{ 'active': route().current('home') }" :href="route('home')">About me</a>
             </li>
             <li>
                 <a :href="route('profile.show')" active="route().current('profile.*')">Projects</a>
@@ -65,13 +66,9 @@ import DropdownLink from '@/Components/DropdownLink.vue';
         font-size: 19px;
         padding: 7px 13px;
     }
-    li a.active, .container_login a.active{
-        border-bottom: 1px solid #000;
-        transition: .5s;
-    }
-    li a:hover, .container_login a:hover{
-        border-bottom: 1px solid #FBFFF1;
-        transition: 1s;
+    li a.active, .container_login a.active,li a:hover, .container_login a:hover{
+        border-bottom: 1px solid #F1F7ED;
+        transition: 0.5s;
     }
     .checkbtn{
         display: none;
@@ -104,7 +101,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
             position: fixed;
             width: 100%;
             height: 100vh;
-            background-color: #35356E;
+            background-color: #353831;
             top: 80px;
             left: -100%;
             text-align: center;
@@ -122,9 +119,9 @@ import DropdownLink from '@/Components/DropdownLink.vue';
             border: none;
         }
         nav ul li a.active, nav ul li a:hover{
-            background-color: #B4C5E4;
+            background-color: #2D2D2A;
             border-radius: 5px;
-            color: #080049;
+            color: #F1F7ED;
             border: none;
         }
         #check:checked ~ ul{

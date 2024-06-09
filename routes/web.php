@@ -18,7 +18,8 @@ use Illuminate\Http\Request;
 */
 
 // No Auth Routes
-Route::get('/', [DashboardController::class,'index']);
+Route::get('/', [DashboardController::class,'index'])->name('home');
+Route::post('/contact', [DashboardController::class, 'contact']);
 
 // Auth Routes
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->group(function () {

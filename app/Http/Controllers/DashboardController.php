@@ -10,7 +10,7 @@ use Illuminate\Foundation\Application;
 class DashboardController extends Controller
 {
     public function index(){
-        return Inertia::render('Welcome', [
+        return Inertia::render('Home', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'laravelVersion' => Application::VERSION,
@@ -20,5 +20,9 @@ class DashboardController extends Controller
 
     public function dashboard(){
         return Inertia::render('Dashboard');
+    }
+
+    public function contact(Request $request){
+        dd($request->all());
     }
 }

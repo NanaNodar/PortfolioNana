@@ -61,16 +61,18 @@ const $t = computed(() => (key) => {
         src: url(assets/fonts/Cabin/static/Cabin-Regular.ttf);
     }
     body{
-        color: #fff;
-        background: rgb(80,13,187);
-        background: linear-gradient(27deg, #500dbb 0%, #35356e 39%, #080049 100%);
+        /* background: rgb(80,13,187);
+        background: linear-gradient(0deg, #500dbb 0%, #35356e 50%, #35356e 50%, #080049 100%); */
+        background: linear-gradient(-60deg, #38423B, #353831, #2D2D2A);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
         font-family: Cabin;
-        color: #FBFFF1;
+        color: #F1F7ED;
         overflow-x: hidden;
     }
     a{
         text-decoration: none;
-        color: #FBFFF1;
+        color: #F1F7ED;
     }
     .page{
         max-width: 1000px;
@@ -102,4 +104,21 @@ const $t = computed(() => (key) => {
             margin: 0 1.4rem;
         }
     }
+    @media (max-width: 600px){
+        .page{
+            margin: 0 0.8rem;
+        }
+    }
+    @keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+    }
+    
 </style>
